@@ -1,0 +1,2 @@
+Chatbotize.hide();
+Chatbotize.logout();

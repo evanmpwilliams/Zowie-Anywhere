@@ -1,0 +1,244 @@
+/* General styling */
+* {
+    box-sizing: border-box;
+    font-family: 'Euclid Circular A', sans-serif;
+    color: #333333
+  }
+  
+  .circled {
+    border: 2px solid #333333;
+    border-radius: 16px;
+    padding: 6px;
+  }
+
+
+html, body, h1, h2{
+    margin:0;
+    padding: 0;
+}
+
+.config-content{
+    padding-left: 32px;
+    padding-right: 32px;
+}
+
+body {
+    background-color: #ffffff; 
+    font-family: 'Euclid Circular A', sans-serif;
+    color: #333333; 
+}
+
+.config-header {
+    height: 72px;
+    background-color: #FCFAF8;
+    padding: 8px;
+    margin-bottom: 32px;
+  }
+  
+  .config-header-inner {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100%;
+  
+  }
+  
+  .config-logo {
+    height: 100%;
+    float: left;
+    text-align: right;
+    margin-right: 6px;
+  }
+
+  .config-title {
+    text-align: left;
+    font-size: 22px;
+    vertical-align: middle;
+    margin-left: 6px;
+    float: left;
+    line-height: 56px;
+  }
+
+/* Table styling */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #FFFFFF;  /* Changed to white */
+    margin-bottom: 40px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);  /* Subtle shadow for the table */
+    border-radius: 4px;  /* Rounded edges for the table */
+}
+
+th, td {
+    border: 1px solid #f8f8f8;
+    padding: 8px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+th {
+    background-color: #d2d2d2; 
+    color: #333333; 
+    border: 1px solid #f8f8f8;
+    padding: 12px 8px;
+    text-align: center;
+}
+
+td {
+    border: 1px solid #f8f8f8;
+    padding: 8px;
+    text-align: center;
+}
+
+/* Table titles */
+.table-title {
+    font-size: 24px; 
+    font-weight: bold; 
+    
+    color: #333333;  
+    text-align: center; 
+    
+    
+}
+
+
+.table-header-wrapper {
+    border-bottom: 1px solid #d2d2d2;
+    display: flex;              /* Add this */
+    justify-content: space-between; /* Optional: If you want to space them apart */
+    align-items: center;            /* Optional: If you want to vertically center them */
+    padding-bottom: 8px; 
+    margin-bottom: 16px; 
+    margin-top: 64px;
+}
+
+.table-button{
+    width: 200px;
+}
+
+/* Button styling */
+button {
+    background-color: #FC4C02;  
+    color: #FCFAF8;  
+    padding: 10px 20px; 
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+
+
+/* Additional styles for better presentation */
+#widgetInstancesTable,
+#widgetBrandsTable {
+    margin-top: 40px;
+}
+
+button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+td.actions button {
+    display: inline-block; 
+    margin-right: 10px; 
+}
+
+td.actions button:last-child {
+    margin-right: 0; 
+}
+
+
+th.active, td.active {
+    width: 80px; /* Adjust this width based on your needs for the "Active" column */
+    text-align: center; /* Center the content for better presentation */
+}
+
+th.actions, td.actions {
+    width: 200px; /* Adjust this width based on your needs for the "Actions" column */
+    text-align: center; /* Center the content for better presentation */
+}
+
+td.actions button {
+    margin-top: 12px;
+    margin-bottom: 12px;
+    width: 80px;
+}
+
+.headerColor input[type="color"], .textBackgroundColor input[type="color"] {
+    border: none;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+}
+
+.color-box {
+    width: 30px;
+    height: 30px;
+    margin: auto;
+}
+
+input[type="color"] {
+    border-radius: 5px;
+    padding: 0;
+    border: 5px solid #DDD;
+  }
+  
+  input[type="color"]::-moz-color-swatch {
+    border: none;
+  }
+  
+  input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+    border-radius: 0;
+  }
+  
+  input[type="color"]::-webkit-color-swatch {
+    border: none;
+  }
+
+  .logo-preview {
+    max-width: 80px;  /* or whatever size you prefer */
+    max-height: 40px; 
+}
+
+.addButton{
+    width: 160px;
+    background-color: #2E86AB;
+}
+
+
+
+.edit{
+    background-color: #b2b2b2;
+
+}
+
+
+.save{
+    background-color: #77BA99;
+   
+
+}
+
+.delete{
+    background-color: #902D41;
+
+}
+
+button:hover{
+    filter: brightness(80%);
+}
+
+button:active{
+    filter: brightness(60%);
+}
+
+.first-table-header{
+    margin-top: 32px !important;
+}
+

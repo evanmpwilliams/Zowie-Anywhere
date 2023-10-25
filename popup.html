@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="popup.css">
+  <link rel="stylesheet" href="select2-override.css">
+  <link href="https://fonts.cdnfonts.com/css/euclid-circular-a" rel="stylesheet">
+  <script src="jquery.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <script src="select2.js"></script>
+</head>
+
+<body>
+  <div class="popup-container">
+    <div class="popup-header">
+      <div class="popup-header-inner">
+        <div class="popup-logo"><img width="100%" height="100%" src="images/zowie-logo.png"></div>
+        <div class="popup-title"><span class="circled">ANYWHERE</span></div>
+      </div>
+    </div>
+    <div class="popup-content denied-content">
+      <p>We're very sorry, but Zowie Anywhere cannot run on this page</p>
+      <p>Zowie Anywhere can only work on normal webpages. It will not work on pages with chrome:// or other non-standard
+        URL prefixes</p>
+
+    </div>
+    <div class="popup-content allowed-content">
+      <div class="popup-subtitle">Run the Zowie Chatbot<br>on Any Website!</div>
+      <div id="widget-switch-wrapper">
+        <input class="checkbox" id="widget-switch" type="checkbox" />
+        <label for="widget-switch" class="checkbox-label">
+          <span class="on">Widget<br>Running</span>
+          <span class="off">Widget<br>Stopped</span>
+        </label>
+      </div>
+      <div id="popup-settings-wrapper">
+        <div class="dropdown-wrapper">
+          <div class="dropdown-title">Select Active Instance</div>
+          <select class="config-dropdown" id="instances-dropdown">
+          </select>
+        </div>
+        <div class="dropdown-wrapper">
+          <div class="dropdown-title">Select Active Brand</div>
+          <select class="config-dropdown" id="brands-dropdown">
+          </select>
+        </div>
+        <div class="md-switches-container">
+        <div class="md-switch-wrapper">
+          <div class="switch-title">Returning<br>Customer</div>
+          <input class="checkbox" id="returning-user-switch" type="checkbox" />
+          <label for="returning-user-switch" class="checkbox-label">
+            <span class="on">Yes</span>
+            <span class="off">No</span>
+          </label>
+        </div>
+        <div class="md-switch-wrapper">
+          <div class="switch-title">Buying<br>Intent</div>
+          <input class="checkbox" id="buying-intent-switch" type="checkbox" />
+          <label for="buying-intent-switch" class="checkbox-label">
+            <span class="on">Yes</span>
+            <span class="off">No</span>
+          </label>
+        </div>
+      </div>
+        <div class="button-container">
+          <button id="btn-submit">Submit</button>
+          <button id="btn-options">Options</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="shared.js"></script>
+  <script src="popup.js"></script>
+
+</body>
+
+</html>

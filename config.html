@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.cdnfonts.com/css/euclid-circular-a" rel="stylesheet">
+    <title>Zowie Anywhere: Options</title>
+    <link rel="stylesheet" href="config.css">
+</head>
+<body>
+
+    <div class="config-header">
+        <div class="config-header-inner">
+          <div class="config-logo"><img width="100%" height="100%" src="images/zowie-logo.png"></div>
+          <div class="config-title"><span class="circled">ANYWHERE</span></div>
+        </div>
+      </div>
+
+
+
+
+<div class="config-content">
+    
+    <!-- First Table: widgetInstances -->
+    <div class="table-header-wrapper first-table-header">
+        <div class="table-header"><h2 class="table-title">Manage Instances</h2></div>
+        <div class="table-button"><button class="addButton" id="addInstance">Add New Instance</button></div>
+    </div>
+    <table id="widgetInstancesTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>ID</th>
+                <th>Active</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Data will be inserted dynamically -->
+        </tbody>
+    </table>
+    
+
+    <!-- Second Table: widgetBrands -->
+    <div class="table-header-wrapper">
+        <div class="table-header"><h2 class="table-title">Manage Brands</h2></div>
+        <div class="table-button"><button class="addButton" id="addBrand">Add New Brand</button></div>
+    </div>
+    
+    <table id="widgetBrandsTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Primary Color</th>
+                <th>Message Color</th>
+                <th>Logo</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>CTA Header</th>
+                <th>CTA Text</th>
+                <th>Active</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Data will be inserted dynamically -->
+        </tbody>
+    </table>
+
+        <!-- Third Table: Extras -->
+        <div class="table-header-wrapper">
+            <div class="table-header"><h2 class="table-title">Manage Metadata & Extras</h2></div>
+        </div>
+        
+        <table id="widgetExtrasTable">
+            <thead>
+                <tr>
+                    <th>Returning Customer CTA Header</th>
+                    <th>Returning Customer CTA Text</th>
+                    <th>Buying Intent CTA Header</th>
+                    <th>Buying Intent CTA Text</th>
+                    <th>User First Name</th>
+                    <th>User Last Name</th>
+                    <th>User Email</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data will be inserted dynamically -->
+            </tbody>
+        </table>
+</div>
+
+    <script src="shared.js"></script>
+    <script src="config.js"></script>
+</body>
+</html>

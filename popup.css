@@ -1,0 +1,273 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Euclid Circular A', sans-serif;
+  color: #333333
+}
+
+.circled {
+  border: 2px solid #333333;
+  border-radius: 16px;
+  padding: 6px;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+html {
+  box-sizing: border-box;
+  width: 300px;
+}
+
+.popup-container {
+  width: 100%;
+  padding-bottom: 24px;
+}
+
+.popup-header {
+  height: 72px;
+  background-color: #FCFAF8;
+  padding: 8px;
+}
+
+.popup-header-inner {
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100%;
+
+}
+
+.popup-logo {
+  height: 100%;
+  float: left;
+  text-align: right;
+  margin-right: 6px;
+}
+
+.denied-content{
+  display:none;
+  padding-left: 16px;
+  padding-right: 16px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.popup-content {
+  padding-top: 16px;
+}
+
+.popup-title {
+  text-align: left;
+  font-size: 22px;
+  vertical-align: middle;
+  margin-left: 6px;
+  float: left;
+  line-height: 56px;
+}
+
+.popup-subtitle {
+  text-align: center;
+  font-size: 18px;
+}
+
+.checkbox-label {
+  display: block;
+  background: #f3f3f3;
+  height: 32px;
+  width: 64px;
+  border-radius: 32px;
+  margin: 24px auto;
+  position: relative;
+  box-shadow: 0 0 0 2px #ddd;
+  font-size: 16px;
+}
+
+.checkbox-label .on {
+  display: block;
+  position: absolute;
+  z-index: 0;
+  left: 0;
+  opacity: 1;
+  text-align: center;
+  opacity: 0;
+  color: #FC4C02;
+}
+
+.checkbox-label .off {
+  display: block;
+  position: absolute;
+  z-index: 0;
+  right: 80px;
+  text-align: center;
+  opacity: 1;
+  opacity: 1;
+  color: #d2d2d2;
+}
+
+/* For the first toggle */
+#widget-switch + .checkbox-label .on, 
+#widget-switch + .checkbox-label .off {
+    line-height: 16px;
+}
+
+/* For the second and third toggles */
+#returning-user-switch + .checkbox-label .on, 
+#returning-user-switch + .checkbox-label .off,
+#buying-intent-switch + .checkbox-label .on, 
+#buying-intent-switch + .checkbox-label .off {
+    line-height: 24px;
+}
+
+.checkbox-label:before {
+  content: '';
+  display: block;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  border-radius: 32px;
+  height: 32px;
+  width: 32px;
+  background: white;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, .2), 0 0 0 2px #ddd;
+}
+
+.checkbox {
+  position: absolute;
+  left: -5000px;
+}
+
+.checkbox:checked+.checkbox-label {
+  background: #FC4C02;
+  box-shadow: 0 0 0 2px #FC4C02;
+}
+
+.checkbox:checked+.checkbox-label .on {
+  left: 80px;
+  opacity: 1;
+}
+
+.checkbox:checked+.checkbox-label .off {
+  right: 0px;
+  opacity: 0;
+}
+
+.checkbox:checked+.checkbox-label:before {
+  left: 32px;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, .2), 0 0 0 2px #FC4C02;
+}
+
+.dropdown-wrapper{
+  width: 60%;
+  margin-left: 20%;
+  margin-bottom: 0;
+}
+
+.config-dropdown{
+  width: 100%;
+  font-size: 32px;
+}
+
+.dropdown-title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #555;
+}
+
+#btn-submit, #btn-options {
+  margin-top: 12px;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  background-color: #FC4C02;
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100px;
+}
+
+#btn-submit:hover, #btn-options:hover {
+  background-color: #E44100; /* Slightly darker shade for hover */
+}
+
+#btn-submit:active, #btn-options:active {
+  background-color: #C02D00; /* Slightly darker shade for hover */
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 8px; /* This creates space between the buttons */
+}
+
+.md-switches-container {
+  display: flex; /* Use flexbox */
+  justify-content: space-between; /* Space them out */
+  margin-top:12px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.md-switch-wrapper {
+  flex: 1; /* Allow each wrapper to take up equal space */
+  margin-right: 10px; /* Spacing between the two divs */
+}
+
+.md-switches-container .md-switch-wrapper:last-child {
+  margin-right: 0; /* Remove margin from the last child to avoid extra spacing */
+}
+
+/* Smaller size for .md-switch-wrapper toggles */
+.md-switch-wrapper .checkbox-label {
+  height: 24px;  /* Decreased from 32px */
+  width: 48px;  /* Decreased from 64px */
+  border-radius: 24px;  /* Half of the height to maintain rounded ends */
+}
+
+.md-switch-wrapper .checkbox-label:before {
+  height: 24px;  /* Decreased from 32px */
+  width: 24px;  /* Decreased from 32px */
+  border-radius: 24px;  /* Half of the height to maintain a circle */
+}
+
+/* Adjust the position when checked */
+.md-switch-wrapper .checkbox:checked + .checkbox-label:before {
+  left: 24px;  /* Adjusted from 32px to account for smaller size */
+}
+
+.md-switch-wrapper .checkbox-label .on,
+.md-switch-wrapper .checkbox-label .off {
+  font-size: 16px;  /* Decreased from 16px */
+  line-height: 24px;  /* Adjusted for new height of toggle */
+}
+
+
+.md-switch-wrapper .checkbox:checked + .checkbox-label .on{
+  left: 56px;
+}
+
+.md-switch-wrapper .checkbox-label .off{
+  right: 56px;
+}
+
+.checkbox-label {
+  cursor: pointer;
+}
+
+.switch-title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 14px;
+  color: #555;
+}
+
+.md-switch-wrapper .checkbox-label{
+  margin-top: 12px;
+}
