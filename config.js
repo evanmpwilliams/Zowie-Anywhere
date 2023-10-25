@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     document.getElementById('addBrand').addEventListener('click', function () {
-        addBrandRowToTable('', '', '', '', '', '', '', '', false);  // Added 'active' parameter
+        addBrandRowToTable('', '#000000', '#000000', '', '', '', '', '', false);  // Added 'active' parameter
         let lastRow = document.querySelector('#widgetBrandsTable tbody tr:last-child');
         makeRowEditable(lastRow);
         let activeCheckbox = lastRow.querySelector('.active input[type="checkbox"]');
@@ -201,11 +201,14 @@ function makeRowEditable(tr) {
     let logoTd = tr.querySelector('.logoUrl');
     if (logoTd) {
         let logoImg = logoTd.querySelector('img');
-        if (logoImg) {
-            let logoSrc = logoImg.src;
-            logoTd.innerHTML = `<input type="text" value="${logoSrc}">`;
-        }
+        console.log(logoImg);
+        let logoSrc = logoImg ? logoImg.getAttribute('src') : '';
+        console.log(logoSrc);
+        logoTd.innerHTML = `<div contenteditable="false"><input type="text" value="${logoSrc}" style="width:100%"></div>`;
+        logoTd.setAttribute('contentEditable', 'false');
     }
+    
+    
 
     colorFields.forEach(field => {
         let td = tr.querySelector(`.${field}`);
@@ -213,8 +216,11 @@ function makeRowEditable(tr) {
             let div = td.querySelector('div');
             if (div) {
                 let color = getComputedStyle(div).backgroundColor;
-                td.innerHTML = `<input type="color" value="${rgbToHex(color)}">`;
+                // Wrap the color input in a div and set contentEditable to false
+                td.innerHTML = `<div contenteditable="false"><input type="color" value="${rgbToHex(color)}"></div>`;
             }
+            // Set the contentEditable attribute of the td to false
+            td.setAttribute('contentEditable', 'false');
         }
     });
 
