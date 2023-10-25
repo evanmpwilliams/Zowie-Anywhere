@@ -3,7 +3,71 @@ let configWidgetMd = {};
 
 document.addEventListener('DOMContentLoaded', function () {
 
+
+
     loadTables();
+
+    var restoreButton = document.getElementById('restoreConfig');
+restoreButton.addEventListener('click', function () {
+  var fileInput = document.createElement('input');
+  fileInput.type = 'file';
+  fileInput.accept = '.json';
+  
+  fileInput.addEventListener('change', function () {
+    var file = fileInput.files[0];
+    if (file) {
+      var reader = new FileReader();
+      
+      reader.onload = function () {
+        try {
+          var widgetConfigs = JSON.parse(reader.result);
+          
+          chrome.storage.sync.set({ widgetConfigs: widgetConfigs }, function () {
+            if (chrome.runtime.lastError) {
+              console.error('Error saving widgetConfigs:', chrome.runtime.lastError);
+            } else {
+              console.log('Configuration restored successfully!');
+              clearTables();
+              loadTables();
+            }
+          });
+          
+        } catch (error) {
+          console.error('Error parsing JSON:', error);
+        }
+      };
+      
+      reader.onerror = function () {
+        console.error('Error reading file:', reader.error);
+      };
+      
+      reader.readAsText(file);
+    }
+  }, false);
+  
+  fileInput.click();
+}, false);
+
+
+    var backupButton = document.getElementById('backupConfig');
+    backupButton.addEventListener('click', async function () {
+        try {
+            const widgetConfigs = await getConfigData();
+
+            const blob = new Blob([JSON.stringify(widgetConfigs, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'widgetConfigs.json';
+            a.click();
+
+            URL.revokeObjectURL(url);
+        } catch (error) {
+            console.error('Error fetching widgetConfigs:', error);
+        }
+    }, false);
+
 
 
     document.getElementById('addInstance').addEventListener('click', function () {
@@ -27,6 +91,20 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 let colorFields = ['headerColor', 'textBackgroundColor'];
+
+function clearTables() {
+    const tableIds = ['widgetInstancesTable', 'widgetBrandsTable', 'widgetExtrasTable'];
+    
+    for (const tableId of tableIds) {
+      const table = document.getElementById(tableId);
+      if (table) {
+        const rows = table.querySelectorAll('tbody tr');
+        rows.forEach(row => row.remove());
+      } else {
+        console.error(`Table with ID ${tableId} not found.`);
+      }
+    }
+  }
 
 async function loadTables() {
     let result = await getConfigData();
@@ -207,8 +285,8 @@ function makeRowEditable(tr) {
         logoTd.innerHTML = `<div contenteditable="false"><input type="text" value="${logoSrc}" style="width:100%"></div>`;
         logoTd.setAttribute('contentEditable', 'false');
     }
-    
-    
+
+
 
     colorFields.forEach(field => {
         let td = tr.querySelector(`.${field}`);
