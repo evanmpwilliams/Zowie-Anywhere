@@ -83,17 +83,7 @@ async function getActiveTabId() {
 }
 
 
-async function executeFunctionOnActiveTab(func) {
-    try {
-        const tabId = await getActiveTabId();
-        chrome.scripting.executeScript({
-            target: { tabId: tabId },
-            function: func
-        });
-    } catch (error) {
-        console.error("Error executing function on active tab:", error);
-    }
-}
+
 
 
 async function startWidget() {
