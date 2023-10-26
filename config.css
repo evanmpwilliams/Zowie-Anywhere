@@ -2,7 +2,8 @@
 * {
     box-sizing: border-box;
     font-family: 'Euclid Circular A', sans-serif;
-    color: #333333
+    color: #333333;
+    font-size: 14px;
   }
   
   .circled {
@@ -241,4 +242,13 @@ button:active{
 .first-table-header{
     margin-top: 32px !important;
 }
+
+.disabled {
+    pointer-events: none;
+}
+
+.color-picker{
+    border:none;
+}
+
 

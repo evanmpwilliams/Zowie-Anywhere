@@ -3,50 +3,49 @@ let configWidgetMd = {};
 
 document.addEventListener('DOMContentLoaded', function () {
 
-
-
     loadTables();
 
+
     var restoreButton = document.getElementById('restoreConfig');
-restoreButton.addEventListener('click', function () {
-  var fileInput = document.createElement('input');
-  fileInput.type = 'file';
-  fileInput.accept = '.json';
-  
-  fileInput.addEventListener('change', function () {
-    var file = fileInput.files[0];
-    if (file) {
-      var reader = new FileReader();
-      
-      reader.onload = function () {
-        try {
-          var widgetConfigs = JSON.parse(reader.result);
-          
-          chrome.storage.sync.set({ widgetConfigs: widgetConfigs }, function () {
-            if (chrome.runtime.lastError) {
-              console.error('Error saving widgetConfigs:', chrome.runtime.lastError);
-            } else {
-              console.log('Configuration restored successfully!');
-              clearTables();
-              loadTables();
+    restoreButton.addEventListener('click', function () {
+        var fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.accept = '.json';
+
+        fileInput.addEventListener('change', function () {
+            var file = fileInput.files[0];
+            if (file) {
+                var reader = new FileReader();
+
+                reader.onload = function () {
+                    try {
+                        var widgetConfigs = JSON.parse(reader.result);
+
+                        chrome.storage.sync.set({ widgetConfigs: widgetConfigs }, function () {
+                            if (chrome.runtime.lastError) {
+                                console.error('Error saving widgetConfigs:', chrome.runtime.lastError);
+                            } else {
+                                console.log('Configuration restored successfully!');
+                                clearTables();
+                                loadTables();
+                            }
+                        });
+
+                    } catch (error) {
+                        console.error('Error parsing JSON:', error);
+                    }
+                };
+
+                reader.onerror = function () {
+                    console.error('Error reading file:', reader.error);
+                };
+
+                reader.readAsText(file);
             }
-          });
-          
-        } catch (error) {
-          console.error('Error parsing JSON:', error);
-        }
-      };
-      
-      reader.onerror = function () {
-        console.error('Error reading file:', reader.error);
-      };
-      
-      reader.readAsText(file);
-    }
-  }, false);
-  
-  fileInput.click();
-}, false);
+        }, false);
+
+        fileInput.click();
+    }, false);
 
 
     var backupButton = document.getElementById('backupConfig');
@@ -94,17 +93,17 @@ let colorFields = ['headerColor', 'textBackgroundColor'];
 
 function clearTables() {
     const tableIds = ['widgetInstancesTable', 'widgetBrandsTable', 'widgetExtrasTable'];
-    
+
     for (const tableId of tableIds) {
-      const table = document.getElementById(tableId);
-      if (table) {
-        const rows = table.querySelectorAll('tbody tr');
-        rows.forEach(row => row.remove());
-      } else {
-        console.error(`Table with ID ${tableId} not found.`);
-      }
+        const table = document.getElementById(tableId);
+        if (table) {
+            const rows = table.querySelectorAll('tbody tr');
+            rows.forEach(row => row.remove());
+        } else {
+            console.error(`Table with ID ${tableId} not found.`);
+        }
     }
-  }
+}
 
 async function loadTables() {
     let result = await getConfigData();
@@ -152,6 +151,8 @@ async function loadTables() {
             defaultMetadata.userEmail
         );
     }
+
+   
 }
 
 
@@ -201,6 +202,7 @@ function addInstanceRowToTable(id, text, active) {
         }
     });
     table.appendChild(tr);
+    
 
     attachRowListeners(tr);
 }
@@ -210,8 +212,12 @@ function addBrandRowToTable(name, headerColor, textBackgroundColor, logoUrl, hea
     let tr = document.createElement('tr');
     tr.innerHTML = `
         <td class="name">${name}</td>
-        <td class="headerColor"><div class="color-box" style="background-color:${headerColor};"></div></td>
-        <td class="textBackgroundColor"><div class="color-box" style="background-color:${textBackgroundColor};"></div></td>
+        <td class="headerColor">
+                <input type="text" data-jscolor="{}" class="color-picker disabled"  value="${headerColor}">
+        </td>
+        <td class="textBackgroundColor">
+                <input type="text" data-jscolor="{}" class="color-picker disabled"  value="${textBackgroundColor}">
+        </td>
         <td class="logoUrl"><img src="${logoUrl}" alt="Logo Preview" class="logo-preview"></td>
         <td class="headerTitle">${headerTitle}</td>
         <td class="headerSubtitle">${headerSubtitle}</td>
@@ -222,7 +228,6 @@ function addBrandRowToTable(name, headerColor, textBackgroundColor, logoUrl, hea
             <button class="edit">Edit</button>
             <button class="save" style="display:none;">Save</button>
             <button class="delete">Delete</button>
-            
         </td>
     `;
     let activeCheckbox = tr.querySelector('.active input[type="checkbox"]');
@@ -232,26 +237,9 @@ function addBrandRowToTable(name, headerColor, textBackgroundColor, logoUrl, hea
         }
     });
     table.appendChild(tr);
+    jscolor.install();
 
     attachRowListeners(tr);
-}
-
-function rgbToHex(rgb) {
-    let sep = rgb.indexOf(",") > -1 ? "," : " ";
-    rgb = rgb.substr(4).split(")")[0].split(sep);
-
-    let r = (+rgb[0]).toString(16),
-        g = (+rgb[1]).toString(16),
-        b = (+rgb[2]).toString(16);
-
-    if (r.length === 1)
-        r = "0" + r;
-    if (g.length === 1)
-        g = "0" + g;
-    if (b.length === 1)
-        b = "0" + b;
-
-    return "#" + r + g + b;
 }
 
 function makeRowEditable(tr) {
@@ -286,21 +274,21 @@ function makeRowEditable(tr) {
         logoTd.setAttribute('contentEditable', 'false');
     }
 
-
-
     colorFields.forEach(field => {
         let td = tr.querySelector(`.${field}`);
         if (td) {
-            let div = td.querySelector('div');
-            if (div) {
-                let color = getComputedStyle(div).backgroundColor;
-                // Wrap the color input in a div and set contentEditable to false
-                td.innerHTML = `<div contenteditable="false"><input type="color" value="${rgbToHex(color)}"></div>`;
-            }
+            // Find input elements with class 'coloris-picker' inside the td
+            let colorPickers = td.querySelectorAll('.color-picker');
+            // Remove 'coloris-disabled' class from each color picker
+            colorPickers.forEach(colorPicker => {
+                colorPicker.classList.remove('disabled');
+            });
+
             // Set the contentEditable attribute of the td to false
             td.setAttribute('contentEditable', 'false');
         }
     });
+
 
     let activeCheckbox = tr.querySelector('.active input[type="checkbox"]');
     if (activeCheckbox) {
@@ -346,11 +334,14 @@ function attachRowListeners(tr) {
             colorFields.forEach(field => {
                 let td = tr.querySelector(`.${field}`);
                 if (td) {
-                    let input = td.querySelector('input[type="color"]');
-                    if (input) {
-                        let color = input.value;
-                        td.innerHTML = `<div class="color-box" style="background-color:${color};"></div>`;
-                    }
+                    // Find input elements with class 'coloris-picker' inside the td
+                    let colorPickers = td.querySelectorAll('.color-picker');
+                    // Remove 'coloris-disabled' class from each color picker
+                    colorPickers.forEach(colorPicker => {
+                        colorPicker.classList.add('disabled');
+                    });
+
+
                 }
             });
 
@@ -402,7 +393,7 @@ function updateStorage() {
     instanceRows.forEach(row => {
         let id = row.querySelector('.id').innerText;
         let text = row.querySelector('.text').innerText;
-        let active = row.querySelector('.active input[type="checkbox"]').checked;  // Adjust this line
+        let active = row.querySelector('.active input[type="checkbox"]').checked;
         widgetInstances.push({ id, text, active });
     });
 
@@ -410,13 +401,13 @@ function updateStorage() {
     brandRows.forEach(row => {
         let name = row.querySelector('.name').innerText;
 
+        // Retrieving the color values directly from the input elements
+        let headerColorInput = row.querySelector('.headerColor .color-picker');
+        let headerColor = headerColorInput ? headerColorInput.value : '';
 
-        // Extracting the backgroundColor from the color divs and converting to hex
-        let headerColorDiv = row.querySelector('.headerColor div');
-        let headerColor = headerColorDiv ? rgbToHex(getComputedStyle(headerColorDiv).backgroundColor) : '';
+        let textBackgroundColorInput = row.querySelector('.textBackgroundColor .color-picker');
+        let textBackgroundColor = textBackgroundColorInput ? textBackgroundColorInput.value : '';
 
-        let textBackgroundColorDiv = row.querySelector('.textBackgroundColor div');
-        let textBackgroundColor = textBackgroundColorDiv ? rgbToHex(getComputedStyle(textBackgroundColorDiv).backgroundColor) : '';
         let logoUrl;
         let logoImg = row.querySelector('.logoUrl img');
         if (logoImg) {
@@ -431,7 +422,7 @@ function updateStorage() {
         let headerSubtitle = row.querySelector('.headerSubtitle').innerText;
         let ctaHeader = row.querySelector('.ctaHeader').innerText;
         let ctaText = row.querySelector('.ctaText').innerText;
-        let active = row.querySelector('.active input[type="checkbox"]').checked;  // Adjust this line
+        let active = row.querySelector('.active input[type="checkbox"]').checked;
         widgetBrands.push({ name, headerColor, textBackgroundColor, logoUrl, headerTitle, headerSubtitle, ctaHeader, ctaText, active });
     });
 
@@ -456,6 +447,7 @@ function updateStorage() {
     });
 }
 
+
 function uncheckAllActiveCheckboxes(exceptCheckbox, tableElement) {
     let allActiveCheckboxes = tableElement.querySelectorAll('.active input[type="checkbox"]');
     allActiveCheckboxes.forEach(checkbox => {
@@ -464,4 +456,5 @@ function uncheckAllActiveCheckboxes(exceptCheckbox, tableElement) {
         }
     });
 }
+
 
