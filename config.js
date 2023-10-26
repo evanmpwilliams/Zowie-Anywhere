@@ -5,6 +5,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
     loadTables();
 
+    const searchBrandsBox = document.getElementById('searchBrandsBox');
+    const searchBrandsTable = document.getElementById('widgetBrandsTable');
+  
+    searchBrandsBox.addEventListener('input', function () {
+      const searchQuery = this.value.toLowerCase();
+  
+      for (const row of searchBrandsTable.querySelectorAll('tbody tr')) {
+        const nameCell = row.querySelector('.name');
+        const isMatch = nameCell && nameCell.textContent.toLowerCase().includes(searchQuery);
+        row.style.display = isMatch ? '' : 'none';
+      }
+    });
+
 
     var restoreButton = document.getElementById('restoreConfig');
     restoreButton.addEventListener('click', function () {
@@ -456,5 +469,3 @@ function uncheckAllActiveCheckboxes(exceptCheckbox, tableElement) {
         }
     });
 }
-
-
