@@ -1,6 +1,6 @@
 function removeChatWidgetElement(selector) {
-    const element = document.querySelector(selector);
-    if (element) element.remove();
+    const elements = document.querySelectorAll(selector);
+    elements.forEach(element => element.remove());
 }
 
 function removeChatWidgetElementById(id) {
@@ -24,6 +24,10 @@ removeChatWidgetElement(".dixa-messenger-namespace");
 removeChatWidgetElementById("solvvy-lazy-button");
 removeChatWidgetElementById("reamazejs-container");
 removeChatWidgetElement(".chat-start-btn");
+removeChatWidgetElement("access-widget-ui");
+removeChatWidgetElement(".scroll-to-top");
+removeChatWidgetElement(".general-feedback-button");
+
 
 var chatbotizeInstanceId = document.getElementById("chatbotize-load-script").getAttribute("instanceid");
 var headerColor = document.getElementById("chatbotize-load-script").getAttribute("headerColor");

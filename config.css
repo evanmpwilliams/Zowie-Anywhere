@@ -8,6 +8,7 @@
   
   .circled {
     border: 2px solid #333333;
+    font-size: 22px;
     border-radius: 16px;
     padding: 6px;
   }
@@ -34,6 +35,12 @@ body {
     background-color: #FCFAF8;
     padding: 8px;
     margin-bottom: 32px;
+    position: -webkit-sticky; /* For Safari compatibility */
+    position: sticky;
+    top: 0; /* Set the top position to 0 so it sticks to the top of the page */
+    z-index: 1000; /* Ensure it sits above the other content */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06); /* Add shadow */
+
   }
   
   .config-header-inner {
@@ -249,6 +256,7 @@ button:active{
 
 .color-picker{
     border:none;
+    width: 140px;
 }
 
 #searchBrandsBox{
