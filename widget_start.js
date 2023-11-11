@@ -27,6 +27,14 @@ removeChatWidgetElement(".chat-start-btn");
 removeChatWidgetElement("access-widget-ui");
 removeChatWidgetElement(".scroll-to-top");
 removeChatWidgetElement(".general-feedback-button");
+removeChatWidgetElement(".intercom-launcher");
+removeChatWidgetElementById("ast-scroll-top");
+removeChatWidgetElement(".zopim");
+removeChatWidgetElementById("solvvy-widget-iframe");
+removeChatWidgetElement(".richpanel-micro");
+removeChatWidgetElementById("richpanel_messenger_iframe");
+
+
 
 
 var chatbotizeInstanceId = document.getElementById("chatbotize-load-script").getAttribute("instanceid");
@@ -49,14 +57,31 @@ var userLastName = document.getElementById("chatbotize-load-script").getAttribut
 var userEmail = document.getElementById("chatbotize-load-script").getAttribute("userEmail");
 
 
+
+
+
 if (buyingIntent == "true") {
     ctaHeader = buyingIntentCtaHeader;
     ctaText = buyingIntentCtaText;
+   
 }
 
 if (returningUser == "true") {
     ctaHeader = returningUserCtaHeader;
     ctaText = returningUserCtaText;
+}
+
+// Use 'var' to declare variables that may be redeclared
+var currentUrl = window.location.href;
+var url = new URL(currentUrl);
+var emailAutomation = url.searchParams.get('emailAutomation');
+
+
+if (emailAutomation == "true"){
+    ctaHeader = "Welcome back, Evan!";
+    ctaText = "Let's get your issue resolved ASAP."
+    returningUser = "false";
+    buyingIntent = "false";
 }
 
 console.log(returningUser);
@@ -83,7 +108,21 @@ Chatbotize.init({
         extraParams: {
             brandName: brandName,
             returningUser: returningUser,
-            buyingIntent: buyingIntent
+            buyingIntent: buyingIntent,
+            emailAutomation: emailAutomation
+        }
+    },
+    onLoaded: function() {
+        if (buyingIntent == "true") {
+            setTimeout(function() {
+                Chatbotize.start();
+            }, 8000);
+        }
+
+        if (emailAutomation == "true") {
+            setTimeout(function() {
+                Chatbotize.start();
+            }, 8000);
         }
     }
 });
