@@ -108,6 +108,7 @@ html {
   color: #d2d2d2;
 }
 
+
 /* For the first toggle */
 #widget-switch + .checkbox-label .on, 
 #widget-switch + .checkbox-label .off {
@@ -162,9 +163,9 @@ html {
 }
 
 .dropdown-wrapper{
-  width: 60%;
-  margin-left: 20%;
-  margin-bottom: 0;
+  width: 75%;
+  margin-left: 12.5%;
+  margin-bottom: 10px;
 }
 
 .config-dropdown{
@@ -205,6 +206,7 @@ html {
   display: flex;
   justify-content: center;
   gap: 8px; /* This creates space between the buttons */
+  margin-bottom: 12px;
 }
 
 .md-switches-container {

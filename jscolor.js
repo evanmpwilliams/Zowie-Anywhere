@@ -937,70 +937,50 @@ var jsc = {
 	},
 
 
-	genColorPreviewCanvas : function (color, separatorPos, specWidth, scaleForHighDPR) {
+	genColorPreviewCanvas : function (color, specWidth, scaleForHighDPR) {
 
-		var sepW = Math.round(jsc.pub.previewSeparator.length);
 		var sqSize = jsc.pub.chessboardSize;
 		var sqColor1 = jsc.pub.chessboardColor1;
 		var sqColor2 = jsc.pub.chessboardColor2;
-
+	
 		var cWidth = specWidth ? specWidth : sqSize * 2;
 		var cHeight = sqSize * 2;
-
+	
 		var canvas = jsc.createEl('canvas');
 		var ctx = canvas.getContext('2d');
-
+	
 		canvas.width = cWidth;
 		canvas.height = cHeight;
 		if (scaleForHighDPR) {
 			jsc.scaleCanvasForHighDPR(canvas);
 		}
-
+	
 		// transparency chessboard - background
 		ctx.fillStyle = sqColor1;
 		ctx.fillRect(0, 0, cWidth, cHeight);
-
+	
 		// transparency chessboard - squares
 		ctx.fillStyle = sqColor2;
 		for (var x = 0; x < cWidth; x += sqSize * 2) {
-			ctx.fillRect(x, 0, sqSize, sqSize);
-			ctx.fillRect(x + sqSize, sqSize, sqSize, sqSize);
+			for (var y = 0; y < cHeight; y += sqSize * 2) {
+				ctx.fillRect(x, y, sqSize, sqSize);
+				ctx.fillRect(x + sqSize, y + sqSize, sqSize, sqSize);
+			}
 		}
-
+	
 		if (color) {
 			// actual color in foreground
 			ctx.fillStyle = color;
 			ctx.fillRect(0, 0, cWidth, cHeight);
 		}
-
-		var start = null;
-		switch (separatorPos) {
-			case 'left':
-				start = 0;
-				ctx.clearRect(0, 0, sepW/2, cHeight);
-				break;
-			case 'right':
-				start = cWidth - sepW;
-				ctx.clearRect(cWidth - (sepW/2), 0, sepW/2, cHeight);
-				break;
-		}
-		if (start !== null) {
-			ctx.lineWidth = 1;
-			for (var i = 0; i < jsc.pub.previewSeparator.length; i += 1) {
-				ctx.beginPath();
-				ctx.strokeStyle = jsc.pub.previewSeparator[i];
-				ctx.moveTo(0.5 + start + i, 0);
-				ctx.lineTo(0.5 + start + i, cHeight);
-				ctx.stroke();
-			}
-		}
-
+	
 		return {
 			canvas: canvas,
 			width: cWidth,
 			height: cHeight,
 		};
 	},
+	
 
 
 	// if position or width is not set => fill the entire element (0%-100%)

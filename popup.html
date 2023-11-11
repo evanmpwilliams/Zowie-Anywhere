@@ -8,6 +8,7 @@
   <script src="jquery.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <script src="select2.js"></script>
+  <script src="defaultconfig.js"></script>
 </head>
 
 <body>
@@ -35,33 +36,21 @@
       </div>
       <div id="popup-settings-wrapper">
         <div class="dropdown-wrapper">
-          <div class="dropdown-title">Select Active Instance</div>
+          <div class="dropdown-title">Select Instance</div>
           <select class="config-dropdown" id="instances-dropdown">
           </select>
         </div>
         <div class="dropdown-wrapper">
-          <div class="dropdown-title">Select Active Brand</div>
+          <div class="dropdown-title">Select Brand</div>
           <select class="config-dropdown" id="brands-dropdown">
           </select>
         </div>
-        <div class="md-switches-container">
-        <div class="md-switch-wrapper">
-          <div class="switch-title">Returning<br>Customer</div>
-          <input class="checkbox" id="returning-user-switch" type="checkbox" />
-          <label for="returning-user-switch" class="checkbox-label">
-            <span class="on">Yes</span>
-            <span class="off">No</span>
-          </label>
+        <div class="dropdown-wrapper">
+          <div class="dropdown-title">Select Proactive Chat</div>
+          <select class="config-dropdown" id="proactive-chats-dropdown">
+          </select>
         </div>
-        <div class="md-switch-wrapper">
-          <div class="switch-title">Buying<br>Intent</div>
-          <input class="checkbox" id="buying-intent-switch" type="checkbox" />
-          <label for="buying-intent-switch" class="checkbox-label">
-            <span class="on">Yes</span>
-            <span class="off">No</span>
-          </label>
-        </div>
-      </div>
+
         <div class="button-container">
           <button id="btn-submit">Submit</button>
           <button id="btn-options">Options</button>
