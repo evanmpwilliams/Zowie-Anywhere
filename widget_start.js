@@ -49,7 +49,10 @@ function removeElementsFromPage(removeElements) {
 removeElementsFromPage(removeElements);
 
 
-
+console.log(initConfigObject);
 Chatbotize.init(initConfigObject);
+
+
+
 
 

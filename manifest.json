@@ -1,7 +1,7 @@
 {
   "name": "Zowie Anywhere",
   "description": "Run Zowie's Chat Widget on Any Website!",
-  "version": "1.0",
+  "version": "2.0",
   "manifest_version": 3,  
   "permissions": ["activeTab", "scripting", "storage"],
   "options_page": "config.html",

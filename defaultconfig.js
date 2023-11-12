@@ -41,7 +41,7 @@ const defaultConfig = {
         },
         {
             "optionKey": "zowieAnywhereWidget",
-            "optionValue": true,
+            "optionValue": "true",
             "optionType": "Extra Param",
             "optionActive": true
         }
