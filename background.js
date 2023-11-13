@@ -25,6 +25,10 @@ chrome.tabs.onUpdated.addListener(async function (tabId, changeInfo, tab) {
         if (widgetRunning) {
           startWidget();
         }
+        // Stop the widget if it is not set to run
+        if (!widgetRunning) {
+          stopWidget();
+        }
       } catch (error) {
         // Log any errors encountered
         console.error('Error:', error);
@@ -41,7 +45,7 @@ chrome.tabs.onActivated.addListener(async (activeInfo) => {
     if (tab.url && tab.url.startsWith("https://")) {
       // Retrieve the widget running status from storage
       let widgetRunning = await getFromStorage('widgetRunning', defaultConfig.widgetRunning);
-      
+
       // Stop the widget if it is not set to run
       if (!widgetRunning) {
         stopWidget();

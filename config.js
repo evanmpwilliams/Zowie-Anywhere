@@ -9,7 +9,7 @@ function generateTables(tableDefinitions, containerId) {
   }
 
   // Iterate over each table definition.
-  tableDefinitions.forEach(function(table) {
+  tableDefinitions.forEach(function (table) {
     // Skip the iteration if the table should not be rendered.
     if (!table.tableRender) return;
 
@@ -416,7 +416,7 @@ function makeRowEditable(row) {
 
     }
 
-    
+
 
     else if (!cell.classList.contains('col-not-content-editable')) {
       cell.contentEditable = 'true';
@@ -460,7 +460,7 @@ function makeRowNotEditable(row) {
     return;
   }
 
-  let autoOpenValue; 
+  let autoOpenValue;
 
   // Make cells not editable and handle special cases
   Array.from(row.cells).forEach(cell => {
@@ -512,7 +512,7 @@ function makeRowNotEditable(row) {
       }
     }
 
-    
+
 
     // Handle checkboxes to make them clickable
     Array.from(row.querySelectorAll('.checkbox-round label')).forEach(checkbox => {
@@ -666,18 +666,49 @@ function setupEventListeners() {
       if (tableId) {
         // Find the search input with the same table-id
         var searchInput = document.querySelector('.table-search-input[table-id="' + tableId + '"]');
+
         if (searchInput) {
           // Toggle the visibility class on the search input
           searchInput.classList.toggle('show-search-input');
           if (searchInput.classList.contains('show-search-input')) {
             searchInput.style.width = ""; // Reset width to default if needed
-            searchInput.focus(); // Focus on the input when it becomes visible
+            setTimeout(function () { // Delay focus to ensure visibility
+              searchInput.focus();
+            }, 500); // Adjust time to match your CSS transition
           } else {
             searchInput.style.width = "0"; // Hide the input
           }
         }
       }
     }
+
+
+
+    // Add event listener for blur event on all .table-search-input elements
+    document.querySelectorAll('.table-search-input').forEach(function (input) {
+      input.addEventListener('blur', function (event) {
+        // Remove the .show-search-input class when the input loses focus
+        event.target.classList.remove('show-search-input');
+        event.target.style.width = "0"; // Hide the input
+
+        // Clear the content of the search input
+        event.target.value = "";
+
+
+        // Manually dispatch an 'input' event
+        var inputEvent = new Event('input', { bubbles: true, cancelable: true });
+        event.target.dispatchEvent(inputEvent);
+
+        // Find the sibling .search-button and remove the 'search-button-open' class
+        var searchButton = event.target.nextElementSibling;
+        if (searchButton && searchButton.classList.contains('search-button')) {
+          searchButton.classList.remove('search-button-open');
+        }
+      });
+    });
+
+
+
 
     if (event.target.matches('.add-event')) {
       animateIconInButton(event, '.add-button', 'i.add-icon', 'spin-animation');

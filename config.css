@@ -307,8 +307,8 @@ button:active {
 }
 
 .checkbox-round input[type="checkbox"]:checked+label {
-    background-color: #66bb6a;
-    border-color: #66bb6a;
+    background-color: #4DAA57;
+    border-color: #4DAA57;
 }
 
 .checkbox-round input[type="checkbox"]:checked+label:after {
@@ -346,7 +346,7 @@ button:active {
 }
 
 .highlight {
-    background-color: #79B9DB;
+    background-color: #C3DBFE;
 }
 
 
@@ -416,8 +416,13 @@ button:active {
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
     border-right: none;
+    outline: none; /* Removes the default focus outline */
     /* Add other properties like padding or border as needed to match your design when visible */
 }
+
+.table-search-input:focus{
+    box-shadow: inset 0 0 0 2px #C3DBFE; /* Inner focus border */
+  }
 
 /* When the search input is toggled, set the width, opacity, and visibility for it to be fully shown */
 .show-search-input {
@@ -502,12 +507,12 @@ button:active {
     width: 80%; /* Adjust width as needed */
     max-width: 500px; /* Maximum width of the container */
     background: #fff;
-    padding: 20px;
+    padding: 48px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     z-index: 1000; /* Above the overlay */
     text-align: center; /* Center the text */
     border-radius: 10px; /* Rounded corners */
-    border: 1px solid #ff4136; /* Red border for caution */
+    border: 2px solid #721121; /* Red border for caution */
     display: none;
   }
   
@@ -517,43 +522,41 @@ button:active {
   
   .warning-header {
     font-size: 24px; /* Large, noticeable text */
-    color: #ff4136; /* Red color for warning */
+    color: #721121; /* Red color for warning */
     font-weight: bold;
-    margin-bottom: 10px;
   }
   
   .warning-text {
     font-size: 16px; /* Readable text size */
-    margin-bottom: 20px;
+    margin-top: 24px;
+    margin-bottom: 32px;
   }
   
   /* Button styles */
   .warning-button {
     padding: 10px 20px;
-    margin: 0 10px; /* Space between buttons */
-    font-size: 16px;
+    margin: 0 16px; /* Space between buttons */
+    font-size: 18px;
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    height: 60px;
+    width: 140px;
   }
   
   .proceed-button {
-    background-color: #ff4136; /* Red color for the proceed button to indicate danger */
-    color: #fff;
+    background-color: #721121; /* Red color for the proceed button to indicate danger */
+    color: #ffffff;
   }
   
-  .proceed-button:hover {
-    background-color: #e12f2f; /* Darker shade on hover */
-  }
+
   
   .cancel-button {
-    background-color: #cccccc; /* Neutral color for the cancel button */
-    color: #333;
+    background-color: #d2d2d2; /* Neutral color for the cancel button */
+    color: #333333;
   }
   
-  .cancel-button:hover {
-    background-color: #bbbbbb; /* Slightly darker on hover */
-  }
+ 
   
   /* Button container styles, if you decide to wrap buttons */
   .button-container {
