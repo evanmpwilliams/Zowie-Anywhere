@@ -158,7 +158,7 @@ function populateTable(tableDef, jsonData) {
     }
     // Handle save button click
     else if (event.target.classList.contains('save-icon')) {
-      row.dataset.newlyCreated = 'false';
+      row.dataset.newlyCreated = false;
       makeRowNotEditable(row);
       saveTableToStorage(tableId);
 
@@ -166,6 +166,7 @@ function populateTable(tableDef, jsonData) {
 
     // Handle cancel button click
     else if (event.target.classList.contains('cancel-icon')) {
+      console.log(row.dataset.newlyCreated);
       // Check if the row was newly created
       if (row.dataset.newlyCreated === 'true') {
         // The row was newly added and not yet saved, so remove it
@@ -197,7 +198,7 @@ function populateTable(tableDef, jsonData) {
 
           else if (cell.classList.contains('col-active-flag')) {
             // Restore 'col-active-flag' cells with the original checkbox state
-            const isChecked = originalData[index] === 'true';
+            const isChecked = originalData[index];
             // Retrieve rowIndex and columnKey
             const rowIndex = row.rowIndex || row.getAttribute('data-row-index');
             const columnKey = cell.getAttribute('columnKey');
@@ -400,12 +401,21 @@ function makeRowEditable(row) {
   // Make cells editable
   Array.from(row.cells).forEach(cell => {
     if (cell.classList.contains('col-image')) {
-      // Get the current image src and replace the cell content with it
+      // Get the image element
       const image = cell.querySelector('img');
-      if (image) {
-        cell.textContent = image.src;
-        cell.contentEditable = 'true';
+
+      // Use getAttribute to accurately check if src is set and not empty
+      const srcValue = image ? image.getAttribute('src') : null;
+
+      if (srcValue && srcValue.trim() !== '') {
+        // If src attribute exists and is not just whitespace
+        cell.textContent = srcValue;
+      } else {
+        // If src attribute is not set, is null, empty, or just whitespace
+        cell.textContent = '';
       }
+
+      cell.contentEditable = 'true';
     } else if (cell.classList.contains('col-dropdown-select')) {
       const currentValue = cell.textContent.trim();
       createSelect2ForCell(cell, currentValue);
@@ -728,7 +738,7 @@ function setupEventListeners() {
 
       // Make sure newRow is not undefined or null before making it editable
       if (newRow) {
-        newRow.dataset.newlyCreated = 'true';
+        newRow.dataset.newlyCreated = true;
         makeRowEditable(newRow);
       } else {
         console.error('New row was not created.');
@@ -917,9 +927,13 @@ function backupTable(tableId) {
   // Create a URL for the Blob
   const url = URL.createObjectURL(blob);
 
-  // Format the datetime stamp for the filename
-  const date = new Date();
-  const datetimeStamp = date.toISOString().replace(/[:.]/g, '-');
+// Format the datetime stamp for the filename
+const date = new Date();
+const dateStamp = date.toISOString().split('T')[0].replace(/-/g, '');
+const timePart = date.toISOString().split('T')[1];
+const timeStamp = timePart.split(':')[0] + timePart.split(':')[1] + timePart.split(':')[2].substring(0, 2);
+const datetimeStamp = `${dateStamp}-${timeStamp}`;
+
 
   // Create an anchor element and set properties for download
   const a = document.createElement('a');
