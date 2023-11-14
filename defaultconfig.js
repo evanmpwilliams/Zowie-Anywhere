@@ -107,7 +107,7 @@ const tableDefinitions = [
     {
         tableId: "instances-table",
         tableTitle: "Instances",
-        tableDescription: "Manage available instances of Zowie chatbot",
+        tableDescription: "Manage instances of Zowie chatbot",
         tableControls: true,
         tableSearchPlaceholder: "Search instances",
         tableRender: true,
@@ -123,7 +123,7 @@ const tableDefinitions = [
     {
         tableId: "brands-table",
         tableTitle: "Brands",
-        tableDescription: "Manage available brands",
+        tableDescription: "Manage branding, including logos, color schemes, and CTAs",
         tableControls: true,
         tableSearchPlaceholder: "Search brands",
         tableRender: true,
@@ -145,7 +145,7 @@ const tableDefinitions = [
     {
         tableId: "proactive-chat-table",
         tableTitle: "Proactive Chats",
-        tableDescription: "Manage proactive chat configurations",
+        tableDescription: "Manage proactive chat scenarios",
         tableControls: true,
         tableSearchPlaceholder: "Search proactive chats",
         tableRender: true,
@@ -164,7 +164,7 @@ const tableDefinitions = [
     {
         tableId: "options-table",
         tableTitle: "Options",
-        tableDescription: "Manage widget options",
+        tableDescription: "Manage options to be passed to Zowie as key-value pairs",
         tableControls: true,
         tableSearchPlaceholder: "Search metadata",
         tableRender: true,
@@ -196,7 +196,7 @@ const tableDefinitions = [
     {
         tableId: "remove-elements-table",
         tableTitle: "Remove Elements",
-        tableDescription: "Manage elements to be removed",
+        tableDescription: "Manage elements to remove",
         tableControls: true,
         tableSearchPlaceholder: "Search elements",
         tableRender: true,

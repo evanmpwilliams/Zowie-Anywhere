@@ -388,8 +388,13 @@ button:active {
     gap: 16px;
 }
 
+.table-header{
+    max-width: 50%;
+}
 
-
+.table-description{
+    font-size: 16px;;
+}
 
 .config-button {
     height: 48px;
