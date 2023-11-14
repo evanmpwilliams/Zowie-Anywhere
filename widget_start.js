@@ -48,7 +48,6 @@ function removeElementsFromPage(removeElements) {
 // Call the function with your removeElements array
 removeElementsFromPage(removeElements);
 
-
 console.log(initConfigObject);
 Chatbotize.init(initConfigObject);
 

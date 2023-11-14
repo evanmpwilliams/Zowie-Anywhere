@@ -195,16 +195,4 @@ document.addEventListener("DOMContentLoaded", async() => {
     $('#brands-dropdown').select2();
     $('#proactive-chats-dropdown').select2();
     loadPopupFromConfig();
-    try {
-        const url = await getActiveTabUrl();
-        if (url.startsWith("https://")) {
-            document.querySelector('.allowed-content').style.display = 'block';
-            document.querySelector('.denied-content').style.display = 'none';
-        } else {
-            document.querySelector('.allowed-content').style.display = 'none';
-            document.querySelector('.denied-content').style.display = 'block';
-        }
-    } catch (error) {
-        console.error("Error fetching active tab's URL:", error);
-    }
 });
