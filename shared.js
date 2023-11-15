@@ -256,6 +256,23 @@ function injectStop() {
   element.appendChild(script);
 }
 
-function stopWidget() {
+async function stopWidget() {
+  const activeTabUrl = await getActiveTabUrl();
+
+
+  // Access the blacklistData from tablesData
+  const blacklistData = await getFromStorage('blacklistData', defaultConfig.blacklistData);
+
+  // Check if activeTabUrl is in the blacklist and blacklist is active
+  const isBlacklisted = blacklistData.some(entry =>
+    entry.blacklistActive && activeTabUrl.includes(entry.blacklistDomain)
+  );
+
+  if (isBlacklisted) {
+    // If a matching domain is found and blacklist is active, do not proceed further
+    console.log('Active tab URL is blacklisted. not sending stop command to widget.');
+    return;
+  }
+
   executeFunctionOnActiveTab(injectStop);
 }
