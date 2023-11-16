@@ -147,8 +147,9 @@ async function startWidget() {
     const value = option.optionValue;
     switch (option.optionType) {
       case 'Init Option':
-        // If the option type is 'Init Option', add it directly to initConfig.
+        // If the option type is 'Init Option', add it directly to initConfig and extraParams.
         initConfig[key] = value;
+        initConfig.metadata.extraParams[key] = value;
         break;
       case 'Metadata':
         // If the option type is 'Metadata', add it to initConfig.metadata.
