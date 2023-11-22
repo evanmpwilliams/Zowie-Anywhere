@@ -7,7 +7,7 @@
   "options_page": "config.html",
   "content_scripts": [
     {
-      "matches": ["https://*/*"],
+      "matches": ["https://*/*","http://*/*"],
       "run_at": "document_start",
       "js": ["inject_widget.js"]
     }
@@ -15,7 +15,7 @@
   "web_accessible_resources": [
     {
       "resources": [ "widget_source.js", "widget_start.js", "widget_stop.js" ],
-      "matches": [ "https://*/*" ]
+      "matches": [ "https://*/*","http://*/*" ]
     }
   ],
   "action": {
@@ -31,6 +31,6 @@
     "service_worker": "background.js"
   },
   "host_permissions": [
-    "https://*/*"
+    "https://*/*","http://*/*"
   ]
 }
