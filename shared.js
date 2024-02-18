@@ -99,7 +99,8 @@ async function startWidget() {
     },
     metadata: {
       extraParams: {}
-    }
+    },
+    resetSession: true
   };
   for (const tableDef of tableDefinitions) {
     tablesData[tableDef.tableStorageKey] = await getFromStorage(tableDef.tableStorageKey, tableDef.defaultData);

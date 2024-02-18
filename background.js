@@ -24,6 +24,7 @@ chrome.tabs.onUpdated.addListener(async function (tabId, changeInfo, tab) {
 
         // Start the widget if it is set to run
         if (widgetRunning) {
+          stopWidget();
           startWidget();
         }
   
